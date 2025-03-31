@@ -7,6 +7,8 @@ function ProtectedAdmin({ children }) {
   const user = useSelector(selectLoggedInUser);
   const userInfo = useSelector(selectUserInfo)
 
+  console.log("User Info in ProtectedAdmin:", userInfo);
+
   if (!user) {
     return <Navigate to="/login" replace={true}></Navigate>;
   }

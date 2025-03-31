@@ -3,6 +3,7 @@ const { fetchCategories, createCategory, importCategories } = require('../contro
 
 const router = express.Router();
 //  /categories is already added in base path
-router.get('/', fetchCategories).post('/',createCategory).post('/import',importCategories)
+router.get('/', fetchCategories).post('/',createCategory)
+// .post('/import',importCategories)
 
 exports.router = router;

@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
-import { ITEMS_PER_PAGE } from '../../../app/constants';
+import { ITEMS_PER_PAGE } from '../../app/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchAllOrdersAsync,
   selectOrders,
   selectTotalOrders,
   updateOrderAsync,
-} from '../../order/orderSlice';
+} from '../order/orderSlice';
 import {
   PencilIcon,
   EyeIcon,
   ArrowUpIcon,
   ArrowDownIcon,
 } from '@heroicons/react/24/outline';
-import Pagination from '../../common/Pagination';
+import Pagination from '../common/Pagination';
 
 function AdminOrders() {
   const [page, setPage] = useState(1);

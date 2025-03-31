@@ -1,4 +1,4 @@
-import ProductForm from "../features/admin/components/ProductForm";
+import ProductForm from "../features/admin/ProductForm";
 import NavBar from "../features/navbar/Navbar";
 function AdminProductFormPage() {
     return ( 

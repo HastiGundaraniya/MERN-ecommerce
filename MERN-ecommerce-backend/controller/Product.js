@@ -81,53 +81,55 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-exports.importProducts = async (req, res) => {
-  try {
-      // Fetch products from the external API
-      const response = await fetch('https://dummyjson.com/products');
 
-      if (!response.ok) {
-          return res.status(500).json({ message: "Failed to fetch products from API" });
-      }
+// for importinsg data into product database
+// exports.importProducts = async (req, res) => {
+//   try {
+//       // Fetch products from the external API
+//       const response = await fetch('https://dummyjson.com/products');
 
-      const data = await response.json();
+//       if (!response.ok) {
+//           return res.status(500).json({ message: "Failed to fetch products from API" });
+//       }
 
-      // Ensure products exist in response
-      if (!data.products || data.products.length === 0) {
-          return res.status(400).json({ message: "No products found in API response" });
-      }
+//       const data = await response.json();
 
-      // Transform products to match your schema
-      const products = data.products.map(product => {
-          const validPrice = Math.max(product.price ?? 1, 1); // Ensure minimum price of 1
-          const validDiscount = Math.max(product.discountPercentage ?? 1, 1); // Ensure minimum discount of 1
+//       // Ensure products exist in response
+//       if (!data.products || data.products.length === 0) {
+//           return res.status(400).json({ message: "No products found in API response" });
+//       }
 
-          return {
-              title: product.title,
-              description: product.description,
-              price: validPrice,
-              discountPercentage: validDiscount,
-              discountPrice: Math.round(validPrice * (1 - validDiscount / 100)),
-              rating: product.rating ?? 0,
-              stock: product.stock ?? 0,
-              brand: product.brand || "Unknown Brand",
-              category: product.category || "Uncategorized",
-              thumbnail: product.thumbnail || "",
-              images: product.images || [],
-              colors: [],
-              sizes: [],
-              highlights: [],
-              deleted: false
-          };
-      });
+//       // Transform products to match your schema
+//       const products = data.products.map(product => {
+//           const validPrice = Math.max(product.price ?? 1, 1); // Ensure minimum price of 1
+//           const validDiscount = Math.max(product.discountPercentage ?? 1, 1); // Ensure minimum discount of 1
 
-      // Insert products into MongoDB
-      const insertedProducts = await Product.insertMany(products);
+//           return {
+//               title: product.title,
+//               description: product.description,
+//               price: validPrice,
+//               discountPercentage: validDiscount,
+//               discountPrice: Math.round(validPrice * (1 - validDiscount / 100)),
+//               rating: product.rating ?? 0,
+//               stock: product.stock ?? 0,
+//               brand: product.brand || "Unknown Brand",
+//               category: product.category || "Uncategorized",
+//               thumbnail: product.thumbnail || "",
+//               images: product.images || [],
+//               colors: [],
+//               sizes: [],
+//               highlights: [],
+//               deleted: false
+//           };
+//       });
 
-      res.status(201).json({ message: "Products imported successfully", products: insertedProducts });
-  } catch (error) {
-      console.error("Error importing products:", error);
-      res.status(500).json({ message: "Error importing products", error: error.message });
-  }
-};
+//       // Insert products into MongoDB
+//       const insertedProducts = await Product.insertMany(products);
+
+//       res.status(201).json({ message: "Products imported successfully", products: insertedProducts });
+//   } catch (error) {
+//       console.error("Error importing products:", error);
+//       res.status(500).json({ message: "Error importing products", error: error.message });
+//   }
+// };
 
