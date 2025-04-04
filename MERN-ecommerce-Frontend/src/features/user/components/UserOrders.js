@@ -74,6 +74,13 @@ export default function UserOrders() {
               </div>
 
               <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+
+                <div className="flex flex-1 items-end justify-between text-sm mb-3">
+                  <div className="text-base font-medium text-gray-900">
+                    <h3 className='text-sm'>Order Date: {order.createdAt}</h3>
+                  </div>
+                </div>
+                <hr />
                 <div className="flex justify-between my-2 text-base font-medium text-gray-900">
                   <p>Subtotal</p>
                   <p>$ {order.totalAmount}</p>
@@ -113,7 +120,7 @@ export default function UserOrders() {
           </div>
         </div>
       ))}
-       {status === 'loading' ? (
+      {status === 'loading' ? (
         <Grid
           height="80"
           width="80"
